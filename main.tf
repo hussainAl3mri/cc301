@@ -9,5 +9,5 @@ terraform {
 
 resource "local_file" "config" {
   filename = "${path.module}/config.txt"
-  content  = "port=80\n"
+  content  = "port=8080\n"
 }
