@@ -1,0 +1,103 @@
+Lab W1P2: Run It Twice
+
+1. Imperative script - ls servers/
+
+web-1791628178041570600.txt
+web-1791628178822601800.txt
+
+The script created two separate files after running twice.
+
+2. Terraform - second apply
+
+No changes. Your infrastructure matches the configuration.
+
+Terraform has compared your real infrastructure against your configuration and found no differences, so no changes are needed.
+
+Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
+
+3. Content change - terraform plan
+
+Change: role=web to role=api
+
+Symbol: -/+ destroy and then create replacement
+
+# local_file.server must be replaced
+~ content = role=web -> role=api # forces replacement
+
+Plan: 1 to add, 0 to change, 1 to destroy.
+
+4. Filename change - terraform plan
+
+Change: web.txt to web-server.txt
+
+Symbol: -/+ destroy and then create replacement
+
+# local_file.server must be replaced
+~ filename = "./web.txt" -> "./web-server.txt" # forces replacement
+
+Plan: 1 to add, 0 to change, 1 to destroy.
+
+5. Which change would lose data on a real bucket, and why?
+
+Both plans show replacement. A replacement of a real storage bucket could cause data loss because Terraform would destroy the old bucket and create a new one, potentially deleting its stored data.
+local_file.server: Refreshing state... [id=5e124f260025dfa0e42511161461295e417412a3]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+-/+ destroy and then create replacement
+
+Terraform will perform the following actions:
+
+  # local_file.server must be replaced
+-/+ resource "local_file" "server" {
+      ~ content              = <<-EOT # forces replacement
+          - role=web
+          + role=api
+        EOT
+      ~ content_base64sha256 = "BJGwUeJhN5Nz1hP2EIjxLGd9Y8I3f8ZuEcSkc+5m6dM=" -> (known after apply)
+      ~ content_base64sha512 = "d/mRLw7cIqrAGB212reVKFDl7Ghfc4gbH0Ie6V3RsELKLFHFVGYIfbm5uPVQjf6zc9GMAy4p0BE58aAASNJWGQ==" -> (known after apply)
+      ~ content_md5          = "cd738f169ddbe73fe4dab6ab89c8b1f1" -> (known after apply)
+      ~ content_sha1         = "5e124f260025dfa0e42511161461295e417412a3" -> (known after apply)
+      ~ content_sha256       = "0491b051e261379373d613f61088f12c677d63c2377fc66e11c4a473ee66e9d3" -> (known after apply)
+      ~ content_sha512       = "77f9912f0edc22aac0181db5dab7952850e5ec685f73881b1f421ee95dd1b042ca2c51c55466087db9b9b8f5508dfeb373d18c032e29d01139f1a00048d25619" -> (known after apply)
+      ~ id                   = "5e124f260025dfa0e42511161461295e417412a3" -> (known after apply)
+        # (3 unchanged attributes hidden)
+    }
+
+Plan: 1 to add, 0 to change, 1 to destroy.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Note: You didn't use the -out option to save this plan, so Terraform can't
+guarantee to take exactly these actions if you run "terraform apply" now.
+local_file.server: Refreshing state... [id=5e124f260025dfa0e42511161461295e417412a3]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+-/+ destroy and then create replacement
+
+Terraform will perform the following actions:
+
+  # local_file.server must be replaced
+-/+ resource "local_file" "server" {
+      ~ content              = <<-EOT # forces replacement
+          - role=web
+          + role=api
+        EOT
+      ~ content_base64sha256 = "BJGwUeJhN5Nz1hP2EIjxLGd9Y8I3f8ZuEcSkc+5m6dM=" -> (known after apply)
+      ~ content_base64sha512 = "d/mRLw7cIqrAGB212reVKFDl7Ghfc4gbH0Ie6V3RsELKLFHFVGYIfbm5uPVQjf6zc9GMAy4p0BE58aAASNJWGQ==" -> (known after apply)
+      ~ content_md5          = "cd738f169ddbe73fe4dab6ab89c8b1f1" -> (known after apply)
+      ~ content_sha1         = "5e124f260025dfa0e42511161461295e417412a3" -> (known after apply)
+      ~ content_sha256       = "0491b051e261379373d613f61088f12c677d63c2377fc66e11c4a473ee66e9d3" -> (known after apply)
+      ~ content_sha512       = "77f9912f0edc22aac0181db5dab7952850e5ec685f73881b1f421ee95dd1b042ca2c51c55466087db9b9b8f5508dfeb373d18c032e29d01139f1a00048d25619" -> (known after apply)
+      ~ filename             = "./web.txt" -> "./web-server.txt" # forces replacement
+      ~ id                   = "5e124f260025dfa0e42511161461295e417412a3" -> (known after apply)
+        # (2 unchanged attributes hidden)
+    }
+
+Plan: 1 to add, 0 to change, 1 to destroy.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Note: You didn't use the -out option to save this plan, so Terraform can't
+guarantee to take exactly these actions if you run "terraform apply" now.

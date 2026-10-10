@@ -2,3 +2,8 @@ terraform.tfvars
 .tfstate
 .tfstate.
 .terraform/
+
+# Terraform generated files
+**/.terraform/
+**/*.tfstate
+**/*.tfstate.*
