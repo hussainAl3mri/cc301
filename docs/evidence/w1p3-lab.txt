@@ -1,0 +1,72 @@
+Lab W1P3 - Cause Drift, Then Find It
+
+1. Terraform plan after deleting team.txt
+local_file.team: Refreshing state... [id=2643e69af72f46062c8779f78bc60c1f465841fe]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # local_file.team will be created
+  + resource "local_file" "team" {
+      + content              = <<-EOT
+            owner=s1234
+        EOT
+      + content_base64sha256 = (known after apply)
+      + content_base64sha512 = (known after apply)
+      + content_md5          = (known after apply)
+      + content_sha1         = (known after apply)
+      + content_sha256       = (known after apply)
+      + content_sha512       = (known after apply)
+      + directory_permission = "0777"
+      + file_permission      = "0777"
+      + filename             = "./team.txt"
+      + id                   = (known after apply)
+    }
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Note: You didn't use the -out option to save this plan, so Terraform can't
+guarantee to take exactly these actions if you run "terraform apply" now.
+
+2. Terraform plan after manually editing team.txt
+local_file.team: Refreshing state... [id=2643e69af72f46062c8779f78bc60c1f465841fe]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # local_file.team will be created
+  + resource "local_file" "team" {
+      + content              = <<-EOT
+            owner=s1234
+        EOT
+      + content_base64sha256 = (known after apply)
+      + content_base64sha512 = (known after apply)
+      + content_md5          = (known after apply)
+      + content_sha1         = (known after apply)
+      + content_sha256       = (known after apply)
+      + content_sha512       = (known after apply)
+      + directory_permission = "0777"
+      + file_permission      = "0777"
+      + filename             = "./team.txt"
+      + id                   = (known after apply)
+    }
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Note: You didn't use the -out option to save this plan, so Terraform can't
+guarantee to take exactly these actions if you run "terraform apply" now.
+
+3. Question: In the real cloud, who might delete a resource without telling anyone, and why would plan save you?
+
+Answer:
+A team member or cloud administrator might accidentally delete a resource manually without informing the team. Terraform plan detects that the resource is missing and shows what needs to be recreated. This helps us identify the problem before making changes.
