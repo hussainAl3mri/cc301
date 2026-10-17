@@ -1,0 +1,28 @@
+W2P7 - Which value wins?
+1. Default only - Prediction: dev
+1. Actual: dev - Prediction correct
+2. terraform.tfvars - Prediction: test
+2. Actual: test - Prediction correct
+3. Environment variable - Prediction: test
+3. Actual: test - Prediction correct
+4. Command-line -var - Prediction: prod
+4. Actual: prod - Prediction correct
+
+5. Validation error:
+
+Planning failed. Terraform encountered an error while generating this plan.
+
+
+Error: Invalid value for variable
+
+  on main.tf line 10:
+  10: variable "env" {
+    ├────────────────
+    │ var.env is "prdo"
+
+env must be dev, test, staging or prod.
+
+This was checked by the validation rule at main.tf:14,3-13.
+
+6. Wrong predictions:
+None. All four predictions matched the actual results.
