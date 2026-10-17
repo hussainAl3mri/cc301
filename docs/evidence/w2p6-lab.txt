@@ -1,0 +1,24 @@
+Lab W2P6 - Pin it, lock it, break it
+
+1. Locked AWS provider version: 5.100.0
+2. Size of .terraform: 686M
+
+Initializing the backend...
+
+Initializing provider plugins...
+- Reusing previous version of hashicorp/aws from the dependency lock file
+
+Error: Failed to query available provider packages
+
+Could not retrieve the list of available versions for provider hashicorp/aws:
+locked provider registry.terraform.io/hashicorp/aws 5.100.0 does not match
+configured version constraint ~> 4.0; must use terraform init -upgrade to
+allow selection of new versions
+
+To see which modules are currently depending on hashicorp/aws and what
+versions are specified, run the following command:
+    terraform providers
+
+3. What protected me in Step 4?
+
+The dependency lock file and the version constraint protected me by preventing Terraform from silently switching to an incompatible AWS provider version.
